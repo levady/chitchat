@@ -10,7 +10,7 @@
     var pusher = new Pusher('1e0a6ecb2d4cebfeb716');
     var channel = pusher.subscribe('room_<%= params[:room_id].to_i %>');
     channel.bind('chat_messages_event', function(data) {
-      alert(data.username + ': ' + data.content);
+			$('#message_content').val('');
 			var message = '<li>'+data.username+': '+data.content+'</li>';
 			$("#chat_room").append(message);
     });

@@ -5,6 +5,6 @@ class SessionsController < ApplicationController
 
   def create
     session[:username] = params[:username]
-    
+    redirect_to rooms_path
   end
 end
