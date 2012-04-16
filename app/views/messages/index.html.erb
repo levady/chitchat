@@ -1,0 +1,29 @@
+<script type="text/javascript">
+    // Enable pusher logging - don't include this in production
+    Pusher.log = function(message) {
+      if (window.console && window.console.log) window.console.log(message);
+    };
+
+    // Flash fallback logging - don't include this in production
+    WEB_SOCKET_DEBUG = true;
+
+    var pusher = new Pusher('1e0a6ecb2d4cebfeb716');
+    var channel = pusher.subscribe('room_<%= params[:room_id].to_i %>');
+    channel.bind('chat_messages_event', function(data) {
+      alert(data.username + ': ' + data.content);
+			var message = '<li>'+data.username+': '+data.content+'</li>';
+			$("#chat_room").append(message);
+    });
+  </script>
+
+<div class="chat_container">
+	<p class="alert"> Welcome to the chat room <%= params[:room_id] %> <%= session[:username] %>! </p>
+	<ul id="chat_room">
+	  <%= render @messages %>
+	</ul>
+	 
+  <%= form_for Message.new, :url => room_messages_path(params[:room_id]), :remote => true do |f| %>
+	  <%= f.text_field :content %>
+	  <%= f.submit "Send" %>
+	<% end %>
+</div>

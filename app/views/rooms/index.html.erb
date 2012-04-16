@@ -1,0 +1,6 @@
+<h1>Choose Chat Rooms</h1>
+<ul>
+	<% Message::ROOM_ID.each do |id| %>
+		<li><%= link_to("Room #{id}", room_messages_path(id)) %></li>
+	<% end %>
+</ul>
