@@ -4,9 +4,13 @@ class ApplicationController < ActionController::Base
   before_filter :login_required
   
   protected
-  
+    
+    def logged_in?
+      !!session[:username]
+    end
+    
     def login_required
-      session[:username] or redirect_to login_path
+      logged_in? or redirect_to login_path
     end
   
 end

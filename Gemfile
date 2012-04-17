@@ -24,6 +24,7 @@ end
 group :test, :development do
 	gem 'rspec-rails'
 	gem 'guard'
+	gem 'shoulda-matchers'
 end
 
 # Deploy with Capistrano

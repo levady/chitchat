@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   skip_before_filter :login_required
   
   def new
-    redirect_to rooms_path if session[:username]
+    redirect_to rooms_path if logged_in?
   end
 
   def create

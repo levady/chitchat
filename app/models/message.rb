@@ -2,6 +2,7 @@ class Message < ActiveRecord::Base
   
   ROOM_ID = [1, 2, 3]
   
+  attr_reader :prev
   attr_accessible :content, :room_id, :username
   
   validates :room_id, :presence => true, :numericality => true,
@@ -9,6 +10,11 @@ class Message < ActiveRecord::Base
   validates :username, :presence => true
   
   before_create :publish_message
+  
+  def self.get_messages(room_id)
+    where(room_id: room_id).limit(20)
+      .order("id DESC").reverse
+  end
   
   private
   
