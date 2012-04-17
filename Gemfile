@@ -9,6 +9,7 @@ gem 'pg'
 gem 'pusher'
 gem 'jquery-rails'
 gem 'will_paginate', '~> 3.0'
+gem 'heroku'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -26,6 +27,10 @@ group :test, :development do
 	gem 'rspec-rails'
 	gem 'guard'
 	gem 'shoulda-matchers'
+end
+
+group :production do
+	gem 'thin'
 end
 
 # Deploy with Capistrano
