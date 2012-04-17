@@ -19,7 +19,8 @@ class Message < ActiveRecord::Base
   private
   
     def publish_message
-      Pusher["room_#{self.room_id}"].trigger!('chat_messages_event',
+      Pusher["#{Rails.env}_room_#{self.room_id}"]
+        .trigger!("#{Rails.env}_chat_messages_event",
         username: self.username, content: self.content)
     end
   

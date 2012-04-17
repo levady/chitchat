@@ -1,7 +1,7 @@
 <script type="text/javascript">
     var pusher = new Pusher('1e0a6ecb2d4cebfeb716');
-    var channel = pusher.subscribe('room_<%= params[:room_id] %>');
-    channel.bind('chat_messages_event', function(data) {
+    var channel = pusher.subscribe('<%= Rails.env %>_room_<%= params[:room_id] %>');
+    channel.bind('<%= Rails.env %>_chat_messages_event', function(data) {
 			var message = '<li>'+data.username+': '+data.content+'</li>';
 			$("#chat_room").append(message);
     });

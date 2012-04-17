@@ -29,8 +29,8 @@ describe Message do
     let(:message) { Message.new(username: "username", content: "content", room_id: 1) }
     
     it "push the right content" do
-      Pusher["room_#{message.room_id}"].should_receive(:trigger!)
-        .with('chat_messages_event', 
+      Pusher["#{Rails.env}_room_#{message.room_id}"].should_receive(:trigger!)
+        .with("#{Rails.env}_chat_messages_event", 
         { username: message.username, content: message.content })
         .and_return(true)
         

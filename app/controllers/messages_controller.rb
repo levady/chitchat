@@ -11,7 +11,8 @@ class MessagesController < ApplicationController
     @message = Message.create!(params[:message]
       .merge(room_id: params[:room_id], username: session[:username]))
       
-  rescue ActiveRecord::ActiveRecordError
-    head :internal_server_error
+  rescue ActiveRecord::ActiveRecordError, Pusher::Error
+    render js: "alert('Oops something went wrong. Please try again.');",
+      status: :internal_server_error
   end
 end
