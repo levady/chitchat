@@ -1,19 +1,19 @@
 class Message < ActiveRecord::Base
+  self.per_page = 5
   
   ROOM_ID = [1, 2, 3]
   
-  attr_reader :prev
   attr_accessible :content, :room_id, :username
   
-  validates :room_id, :presence => true, :numericality => true,
-            :inclusion => { :in => ROOM_ID }
+  validates :room_id, presence: true, numericality: true,
+            inclusion: { :in => ROOM_ID }
   validates :username, :presence => true
   
   before_create :publish_message
   
-  def self.get_messages(room_id)
-    where(room_id: room_id).limit(20)
-      .order("id DESC").reverse
+  def self.get_messages(room_id, page)
+    where(room_id: room_id).page(page)
+      .order("id DESC")
   end
   
   private

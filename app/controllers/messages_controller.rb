@@ -1,7 +1,10 @@
 class MessagesController < ApplicationController
+  respond_to :html, :js
   
   def index
-    @messages = Message.get_messages(params[:room_id])
+    @messages = Message.get_messages(params[:room_id], params[:page])
+    
+    respond_with(@messages)
   end
 
   def create

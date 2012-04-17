@@ -13,12 +13,23 @@ describe MessagesController do
     let(:messages) { [Message.new] }
     
     it "assigns messages variable" do
-      Message.should_receive(:get_messages).with("1")
+      Message.should_receive(:get_messages).with("1", "2")
         .and_return(messages)
       
-      get :index, :room_id => 1
+      get :index, room_id: 1, page: 2
       
       assigns(:messages).should_not be_nil
+    end
+    
+    context "ajax request" do
+      it "render index.js.erb" do
+        Message.stub(:get_messages)
+          .and_return(messages)
+          
+        xhr :get, :index, room_id: 1, page: 2
+        
+        response.should render_template(template: "index.js.erb")
+      end
     end
   end
 
@@ -33,7 +44,7 @@ describe MessagesController do
       end
       
       it "returns http 200" do
-        xhr :post, :create, :message => params
+        xhr :post, :create, message: params
         response.code.should == "200"
       end
     end
@@ -45,7 +56,7 @@ describe MessagesController do
       end
       
       it "returns http 500" do
-        xhr :post, :create, :message => params
+        xhr :post, :create, message: params
         response.code.should == "500"
       end
     end

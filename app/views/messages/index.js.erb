@@ -1,0 +1,6 @@
+<% if @messages.next_page %>
+	$('.prev a').attr("href", '<%= room_messages_path(params[:room_id], page: @messages.next_page) %>')
+<% else %>
+	$(".prev a").remove();
+<% end %>
+$(".prev").after('<%= escape_javascript render @messages.reverse %>');

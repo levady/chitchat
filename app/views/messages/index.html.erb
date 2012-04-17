@@ -8,7 +8,7 @@
     WEB_SOCKET_DEBUG = true;
 
     var pusher = new Pusher('1e0a6ecb2d4cebfeb716');
-    var channel = pusher.subscribe('room_<%= params[:room_id].to_i %>');
+    var channel = pusher.subscribe('room_<%= params[:room_id] %>');
     channel.bind('chat_messages_event', function(data) {
 			$('#message_content').val('');
 			var message = '<li>'+data.username+': '+data.content+'</li>';
@@ -17,12 +17,20 @@
   </script>
 
 <div class="chat_container">
-	<p class="alert"> Welcome to the chat room <%= params[:room_id] %> <%= session[:username] %>! </p>
+	<p class="notice"> Welcome to the chat room <%= params[:room_id] %> <%= session[:username] %>! </p>
 	<ul id="chat_room">
-	  <%= render @messages %>
+		<% if @messages.next_page %>
+			<div class="prev">
+				<%= link_to "load previous chat", 
+					{ action: :index, params: { page: @messages.next_page } },
+					remote: true
+				%>
+			</div>
+		<% end %>
+	  <%= render @messages.reverse %>
 	</ul>
 	 
-  <%= form_for Message.new, :url => room_messages_path(params[:room_id]), :remote => true do |f| %>
+  <%= form_for Message.new, url: room_messages_path(params[:room_id]), remote: true do |f| %>
 	  <%= f.text_field :content %>
 	  <%= f.submit "Send" %>
 	<% end %>

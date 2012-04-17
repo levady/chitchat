@@ -14,14 +14,14 @@ describe Message do
     let(:messages) { [Message.new] }
     
     before do
-      messages.stub_chain(:limit, :order, :reverse)
+      messages.stub_chain(:page, :order)
     end
     
     it "returns messages for specific room" do
       Message.should_receive(:where)
         .with(room_id: 2).and_return(messages)
         
-      Message.get_messages(2)
+      Message.get_messages(2, 1)
     end
   end
   

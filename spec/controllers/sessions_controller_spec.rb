@@ -21,7 +21,7 @@ describe SessionsController do
   
   describe "#create" do
     before do
-      post :create, :username => "username"
+      post :create, username: "username"
     end
     
     it "set session" do
