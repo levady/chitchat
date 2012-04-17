@@ -39,20 +39,22 @@ describe MessagesController do
     
     context "saving success" do
       before do
-        Message.stub(:new).and_return(message)
-        message.stub(:save).and_return(true)
+        Message.stub(:create!).and_return(message)
+        xhr :post, :create, message: params
       end
       
       it "returns http 200" do
-        xhr :post, :create, message: params
         response.code.should == "200"
+      end
+      
+      it "render create.js.erb" do
+        response.should render_template(template: "create.js.erb")
       end
     end
     
     context "saving failed" do
       before do
-        Message.stub(:new).and_return(message)
-        message.stub(:save).and_return(false)
+        Message.stub(:create!).and_raise(ActiveRecord::ActiveRecordError)
       end
       
       it "returns http 500" do

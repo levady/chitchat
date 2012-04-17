@@ -8,13 +8,10 @@ class MessagesController < ApplicationController
   end
 
   def create
-    @message = Message.new(params[:message]
+    @message = Message.create!(params[:message]
       .merge(room_id: params[:room_id], username: session[:username]))
       
-    if @message.save
-      head :ok
-    else
-      head :internal_server_error
-    end
+  rescue ActiveRecord::ActiveRecordError
+    head :internal_server_error
   end
 end
