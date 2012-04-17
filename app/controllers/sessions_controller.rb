@@ -15,4 +15,12 @@ class SessionsController < ApplicationController
     redirect_to login_path
   end
   
+  def root
+    if logged_in?
+      redirect_to rooms_path
+    else
+      redirect_to login_path
+    end
+  end
+  
 end
