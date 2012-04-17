@@ -30,3 +30,11 @@ RSpec.configure do |config|
   # rspec-rails.
   config.infer_base_class_for_anonymous_controllers = false
 end
+
+def login_user
+  session[:username] = "username"
+end
+
+def logout_user
+  session[:username] = nil
+end

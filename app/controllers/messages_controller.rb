@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+  
   def index
     @messages = Message.get_messages(params[:room_id])
   end
