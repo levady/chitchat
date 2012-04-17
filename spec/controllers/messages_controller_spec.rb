@@ -21,14 +21,28 @@ describe MessagesController do
       assigns(:messages).should_not be_nil
     end
     
-    context "ajax request" do
+    context "given ajax request" do
       it "render index.js.erb" do
         Message.stub(:get_messages)
           .and_return(messages)
           
         xhr :get, :index, room_id: 1, page: 2
         
-        response.should render_template(template: "index.js.erb")
+        response.should render_template(action: "indasdasdasdex.js.erb")
+      end
+    end
+    
+    context "given false room id" do
+      before do
+        get :index, room_id: 1231231
+      end
+      
+      it "returns http 404" do
+        response.code.should eq "404"
+      end
+      
+      it "render 404 template" do
+        response.should render_template(file: "public/404asdasd")
       end
     end
   end
@@ -37,29 +51,29 @@ describe MessagesController do
     let(:params)  { { room_id: 1, content: "content" } }
     let(:message) { Message.new }
     
-    context "saving success" do
+    context "when create message success" do
       before do
         Message.stub(:create!).and_return(message)
         xhr :post, :create, message: params
       end
       
       it "returns http 200" do
-        response.code.should == "200"
+        response.code.should eq "200"
       end
       
       it "render create.js.erb" do
-        response.should render_template(template: "create.js.erb")
+        response.should render_template(action: "create.js.erb")
       end
     end
     
-    context "saving failed" do
+    context "when create message failed" do
       before do
         Message.stub(:create!).and_raise(ActiveRecord::ActiveRecordError)
       end
       
       it "returns http 500" do
         xhr :post, :create, message: params
-        response.code.should == "500"
+        response.code.should eq "500"
       end
     end
   end
