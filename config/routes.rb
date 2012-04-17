@@ -1,6 +1,7 @@
 Chitchat::Application.routes.draw do
   get  '/login' => 'sessions#new', :as => :login
   post '/login' => 'sessions#create', :as => :login
+  get '/logout' => 'sessions#logout'
   
   resources :rooms, :only => [:index] do
     resources :messages, :only => [:index, :create]

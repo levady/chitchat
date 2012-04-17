@@ -8,7 +8,7 @@ class Message < ActiveRecord::Base
             :inclusion => { :in => ROOM_ID }
   validates :username, :presence => true
   
-  after_create :publish_message
+  before_create :publish_message
   
   private
   

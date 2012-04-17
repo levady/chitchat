@@ -7,7 +7,7 @@ gem 'rails', '3.2.3'
 
 gem 'mysql2'
 gem 'pusher'
-
+gem 'jquery-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -21,16 +21,10 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
-
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the app server
-# gem 'unicorn'
+group :test, :development do
+	gem 'rspec-rails'
+	gem 'guard'
+end
 
 # Deploy with Capistrano
 # gem 'capistrano'
