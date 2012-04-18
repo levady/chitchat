@@ -2,6 +2,7 @@ class Message < ActiveRecord::Base
   self.per_page = 5
   
   ROOM_ID = (1..10)
+  CHAT_SUBJECTS = ["Chat away!", "Trolling allowed :P", "42?"]
   
   attr_accessible :content, :room_id, :username
   

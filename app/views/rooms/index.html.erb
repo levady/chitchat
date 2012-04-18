@@ -1,10 +1,12 @@
 <div class="span4">
-<h2>Choose chat rooms</h2>
+	<h2>What's your lucky number?</h2>
 	<div class="well">
 		<ul class="nav nav-list">
 			<% Message::ROOM_ID.each do |id| %>
 				<li>
-					<a href="<%= room_messages_path(id) %>"><i class="icon-star"></i>Room <%= id %></a>
+					<a href="<%= room_messages_path(id) %>">
+						<i class="icon-star"></i>Room <%= id %>
+					</a>
 				</li>
 			<% end %>
 		</ul>
