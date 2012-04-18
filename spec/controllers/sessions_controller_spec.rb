@@ -24,13 +24,18 @@ describe SessionsController do
       before do
         post :create, username: "username"
       end
-
+      
       it "set session" do
         session[:username].should_not be_nil
       end
       
       it "redirected to rooms page" do
         response.should redirect_to(rooms_path)
+      end
+      
+      it "sanitize username session string" do
+        post :create, username: "<script>alert('test')</script><b>bold</b>"
+        session[:username].should eq "alert('test')bold"
       end
     end
     

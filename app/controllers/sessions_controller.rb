@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       reset_session
       redirect_to login_path, flash: { error: "Please set the username." }
     else
-      session[:username] = params[:username]
+      session[:username] = Sanitize.clean params[:username]
       redirect_to rooms_path
     end
   end
