@@ -1,7 +1,7 @@
 class Message < ActiveRecord::Base
   self.per_page = 5
   
-  ROOM_ID = [1, 2, 3]
+  ROOM_ID = (1..10)
   
   attr_accessible :content, :room_id, :username
   

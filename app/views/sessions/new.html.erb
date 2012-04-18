@@ -1,5 +1,11 @@
-<%= form_tag login_path do |f| %>
-  <%= label_tag "Enter your username" %>
-  <%= text_field_tag :username %>
-  <%= submit_tag "Enter" %>
-<% end %>
+<div class="hero-unit">
+  <h1>ChatChit</h1>
+  <p>ChatChit is a super simple chat app!</p>
+  <p>
+		<%= form_tag login_path do |f| %>
+		  <%= label_tag "Enter your username" %>
+		  <%= text_field_tag :username %>
+		  <%= submit_tag "Enter" %>
+		<% end %>
+  </p>
+</div>

@@ -8,7 +8,7 @@ describe Message do
   Message::ROOM_ID.each do |id|
     it { should allow_value(id).for(:room_id) }
   end
-  it { should_not allow_value(5).for(:room_id) }
+  it { should_not allow_value(100).for(:room_id) }
   
   describe ".get_messages" do
     let(:messages) { [Message.new] }

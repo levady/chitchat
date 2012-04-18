@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   
   before_filter :login_required
   
+  helper_method :logged_in?
+  
   protected
     
     def logged_in?

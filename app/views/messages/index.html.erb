@@ -2,14 +2,14 @@
     var pusher = new Pusher('1e0a6ecb2d4cebfeb716');
     var channel = pusher.subscribe('<%= Rails.env %>_room_<%= params[:room_id] %>');
     channel.bind('<%= Rails.env %>_chat_messages_event', function(data) {
-			var message = '<li>'+data.username+': '+data.content+'</li>';
+			var message = '<dt>'+data.username+'</dt><dd>'+data.content+'</dd>';
 			$("#chat_room").append(message);
     });
   </script>
 
 <div class="chat_container">
-	<p class="notice"> Welcome to the chat room <%= params[:room_id] %> <%= session[:username] %>! </p>
-	<ul id="chat_room">
+	<h3>Welcome to the chat room <%= params[:room_id] %> <%= session[:username] %>!</h3>
+	<dl class="dl-horizontal" id="chat_room">
 		<% if @messages.next_page %>
 			<div class="prev">
 				<%= link_to "load previous chat", 
@@ -19,7 +19,7 @@
 			</div>
 		<% end %>
 	  <%= render @messages.reverse %>
-	</ul>
+	</dl>
 	 
   <%= form_for Message.new, url: room_messages_path(params[:room_id]), remote: true do |f| %>
 	  <%= f.text_field :content %>

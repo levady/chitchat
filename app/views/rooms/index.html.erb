@@ -1,6 +1,10 @@
-<h1>Choose Chat Rooms</h1>
-<ul>
-	<% Message::ROOM_ID.each do |id| %>
-		<li><%= link_to("Room #{id}", room_messages_path(id)) %></li>
-	<% end %>
-</ul>
+<h2>Choose Chat Rooms</h2>
+<div class="well">
+	<ul class="nav nav-list">
+		<% Message::ROOM_ID.each do |id| %>
+			<li>
+				<a href="<%= room_messages_path(id) %>"><i class="icon-star"></i>Room <%= id %></a>
+			</li>
+		<% end %>
+	</ul>
+</div>

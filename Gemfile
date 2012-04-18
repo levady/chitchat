@@ -33,6 +33,10 @@ group :production do
 	gem 'thin'
 end
 
+group :assets do
+  gem 'twitter-bootstrap-rails'
+end
+
 # Deploy with Capistrano
 # gem 'capistrano'
 

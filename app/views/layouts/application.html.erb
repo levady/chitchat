@@ -6,10 +6,15 @@
   <%= javascript_include_tag "application" %>
 	<%= javascript_include_tag "http://js.pusher.com/1.11/pusher.min.js" %>
   <%= csrf_meta_tags %>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-
-<%= yield %>
-
+<%= render partial: "layouts/header" if logged_in? %>
+<div class="container">
+	<div class="row"><%= yield %></div>
+</div>
+<footer class="navbar navbar-fixed-bottom">
+	<p align="center">© 2012 Le Vady Sinarta.</p>
+</footer>
 </body>
 </html>

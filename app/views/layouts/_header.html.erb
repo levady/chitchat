@@ -1,0 +1,18 @@
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <%= link_to "ChatChit", root_path, class: "brand" %>
+      <div class="nav-collapse">
+        <ul class="nav">
+          <li><%= link_to "Chat Rooms", rooms_path %></li>
+          <li><%= link_to "Logout", logout_path if logged_in? %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
