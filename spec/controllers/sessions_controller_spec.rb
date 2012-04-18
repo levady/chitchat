@@ -2,23 +2,6 @@ require 'spec_helper'
 
 describe SessionsController do
   
-  describe "#index" do
-    before do
-      login_user
-    end
-    
-    after do
-      login_user
-    end
-    
-    context "logged in" do
-      it "redirected to rooms page" do
-        get :new
-        response.should redirect_to(rooms_path)
-      end
-    end
-  end
-  
   describe "#create" do
     context "when username is not blank" do
       before do
@@ -48,8 +31,8 @@ describe SessionsController do
         session[:username].should be_nil
       end
       
-      it "redirected to login page" do
-        response.should redirect_to(login_path)
+      it "redirected to root page" do
+        response.should redirect_to(root_path)
       end
       
       it "set flash error message" do
@@ -68,33 +51,8 @@ describe SessionsController do
       session[:username].should be_nil
     end
     
-    it "redirected to login page" do
-      response.should redirect_to(login_path)
+    it "redirected to root page" do
+      response.should redirect_to(root_path)
     end
   end
-
-  describe "#root" do
-    context "logged in" do
-      before do
-        login_user
-      end
-      
-      after do
-        logout_user
-      end
-      
-      it "redirected to rooms page" do
-        get :root
-        response.should redirect_to rooms_path
-      end
-    end
-    
-    context "logged out" do
-      it "redirected to login page" do
-        get :root
-        response.should redirect_to login_path
-      end
-    end
-  end
-
 end

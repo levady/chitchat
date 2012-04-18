@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
     end
     
     def login_required
-      logged_in? or redirect_to login_path
+      logged_in? or redirect_to root_path
     end
   
 end

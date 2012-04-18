@@ -1,8 +1,7 @@
 Chitchat::Application.routes.draw do
   
-  root :to => 'sessions#root'
+  root :to => 'home#root'
   
-  get  '/login' => 'sessions#new', :as => :login
   post '/login' => 'sessions#create', :as => :login
   get '/logout' => 'sessions#logout'
   
