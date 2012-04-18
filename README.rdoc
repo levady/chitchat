@@ -1,1 +1,8 @@
-=== 
+ChatChit
+Super simple real time chat app using pusher gem.
+
+For more information:
+
+http://pusher.com/
+
+Demo: http://chatchit.herokuapp.com/
