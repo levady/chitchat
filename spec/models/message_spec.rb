@@ -25,6 +25,13 @@ describe Message do
     end
   end
   
+  describe "#sanitize_content" do
+    let(:message) { Message.new(content: "<script>alert('test')</script><b>bold</b>") }
+    it "remove tags" do
+      message.send(:sanitize_content).should eq "alert('test')bold"
+    end
+  end
+  
   describe "#publish_message" do
     let(:message) { Message.new(username: "username", content: "content", room_id: 1) }
     

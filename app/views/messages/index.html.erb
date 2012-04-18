@@ -26,7 +26,7 @@
 	</dl>
 	 
   <%= form_for Message.new, url: room_messages_path(params[:room_id]), html: { class: "well" }, remote: true do |f| %>
-		<%= f.submit "Send" %>
 	  <%= f.text_field :content, placeholder: "Message.." %>
+		<%= f.submit "Send" %>
 	<% end %>
 </div>

@@ -10,6 +10,7 @@ class Message < ActiveRecord::Base
             inclusion: { :in => ROOM_ID }
   validates :username, :presence => true
   
+  before_validation :sanitize_content
   before_create :publish_message
   
   def self.get_messages(room_id, page)
@@ -23,6 +24,10 @@ class Message < ActiveRecord::Base
       Pusher["#{Rails.env}_room_#{self.room_id}"]
         .trigger!("#{Rails.env}_chat_messages_event",
         username: self.username, content: self.content)
+    end
+    
+    def sanitize_content
+      self.content = Sanitize.clean self.content
     end
   
 end
