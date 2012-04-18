@@ -7,22 +7,21 @@
     });
   </script>
 
-<div class="chat_container">
+<div class="chat_container span4">
 	<h3>Welcome to the chat room <%= params[:room_id] %> <%= session[:username] %>!</h3>
-	<dl class="dl-horizontal" id="chat_room">
+	<dl class="dl-horizontal well" id="chat_room">
 		<% if @messages.next_page %>
-			<div class="prev">
-				<%= link_to "load previous chat", 
-					{ action: :index, params: { page: @messages.next_page } },
-					remote: true
-				%>
-			</div>
+			<%= button_to "Load previous message", 
+				{ action: :index, params: { page: @messages.next_page } },
+				class: "btn btn-info span3", form_class: "prev", method: :get,
+				remote: true, disable_with: "loading..."
+			%>
 		<% end %>
 	  <%= render @messages.reverse %>
 	</dl>
 	 
-  <%= form_for Message.new, url: room_messages_path(params[:room_id]), remote: true do |f| %>
-	  <%= f.text_field :content %>
-	  <%= f.submit "Send" %>
+  <%= form_for Message.new, url: room_messages_path(params[:room_id]), html: { class: "well" }, remote: true do |f| %>
+		<%= f.submit "Send" %>
+	  <%= f.text_field :content, placeholder: "Message.." %>
 	<% end %>
 </div>
