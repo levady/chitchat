@@ -20,16 +20,36 @@ describe SessionsController do
   end
   
   describe "#create" do
-    before do
-      post :create, username: "username"
+    context "when username is not blank" do
+      before do
+        post :create, username: "username"
+      end
+
+      it "set session" do
+        session[:username].should_not be_nil
+      end
+      
+      it "redirected to rooms page" do
+        response.should redirect_to(rooms_path)
+      end
     end
     
-    it "set session" do
-      session[:username].should_not be_nil
-    end
-    
-    it "redirected to rooms page" do
-      response.should redirect_to(rooms_path)
+    context "when session is blank" do
+      before do
+        post :create, username: ""
+      end
+
+      it "reset session" do
+        session[:username].should be_nil
+      end
+      
+      it "redirected to login page" do
+        response.should redirect_to(login_path)
+      end
+      
+      it "set flash error message" do
+        flash[:error].should eq "Please set the username."
+      end
     end
     
   end

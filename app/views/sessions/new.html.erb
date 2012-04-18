@@ -1,10 +1,16 @@
-<div class="hero-unit">
+<div class="hero-unit span4 offset3">
   <h1>ChatChit</h1>
   <p>ChatChit is a super simple chat app!</p>
   <p>
 		<%= form_tag login_path do |f| %>
+			<% if flash[:error] %>
+				<div class="alert alert-error">
+				  <a class="close" data-dismiss="alert">×</a>
+				  <%= flash[:error] %>
+				</div>
+			<% end %>
 		  <%= label_tag "Enter your username" %>
-		  <%= text_field_tag :username %>
+		  <%= text_field_tag :username, nil, class: "input-big", placeholder: "Username" %>
 		  <%= submit_tag "Enter" %>
 		<% end %>
   </p>
