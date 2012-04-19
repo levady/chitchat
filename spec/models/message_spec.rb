@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Message do
   
+  it { should validate_presence_of(:content) }
   it { should validate_presence_of(:username) }
   it { should validate_presence_of(:room_id) }
   it { should validate_numericality_of(:room_id) }

@@ -9,6 +9,7 @@ class Message < ActiveRecord::Base
   validates :room_id, presence: true, numericality: true,
             inclusion: { :in => ROOM_ID }
   validates :username, :presence => true
+  validates :content, :presence => true
   
   before_validation :sanitize_content
   before_create :publish_message

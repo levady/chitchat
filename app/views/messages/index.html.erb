@@ -1,11 +1,11 @@
 <script type="text/javascript">
-    var pusher = new Pusher('1e0a6ecb2d4cebfeb716');
-    var channel = pusher.subscribe('<%= Rails.env %>_room_<%= params[:room_id] %>');
-    channel.bind('<%= Rails.env %>_chat_messages_event', function(data) {
-			var message = '<dt>'+data.username+'</dt><dd>'+data.content+'</dd>';
-			$("#chat_room").append(message);
-    });
-  </script>
+	var pusher = new Pusher('1e0a6ecb2d4cebfeb716');
+  var channel = pusher.subscribe('<%= Rails.env %>_room_<%= params[:room_id] %>');
+  channel.bind('<%= Rails.env %>_chat_messages_event', function(data) {
+	var message = '<dt>'+data.username+'</dt><dd>'+data.content+'</dd>';
+	$("#chat_room").append(message);
+  });
+</script>
 
 <div class="chat_container span4">
 	<div class="page-header">
@@ -25,7 +25,8 @@
 	  <%= render @messages.reverse %>
 	</dl>
 	 
-  <%= form_for Message.new, url: room_messages_path(params[:room_id]), html: { class: "well" }, remote: true do |f| %>
+  <%= form_for Message.new, url: room_messages_path(params[:room_id]), html: { class: "well", id: "send" }, remote: true do |f| %>
+		<div class="alert alert-error hidden"></div>
 	  <%= f.text_field :content, placeholder: "Message.." %>
 		<%= f.submit "Send" %>
 	<% end %>

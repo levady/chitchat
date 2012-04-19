@@ -9,12 +9,15 @@ class MessagesController < ApplicationController
   end
 
   def create
-    @message = Message.create!(params[:message]
-      .merge(room_id: params[:room_id], username: session[:username]))
+    @message = Message.new(params[:message]
+      .merge(room_id: params[:room_id],
+      username: session[:username]))
       
-  rescue ActiveRecord::ActiveRecordError, Pusher::Error
-    render js: "alert('Oops something went wrong. Please try again.');",
-      status: :internal_server_error
+    if @message.save
+      render action: :create
+    else
+      render template: "messages/create_errors.js.erb"
+    end
   end
   
   protected 
