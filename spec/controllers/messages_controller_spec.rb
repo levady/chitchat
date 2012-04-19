@@ -51,9 +51,13 @@ describe MessagesController do
     let(:params)  { { room_id: 1, content: "content" } }
     let(:message) { Message.new }
     
+    before do
+      Message.stub(:new).and_return(message)
+    end
+    
     context "when create message success" do
       before do
-        Message.stub(:create!).and_return(message)
+        message.stub(:save).and_return(true)
         xhr :post, :create, message: params
       end
       
@@ -68,12 +72,11 @@ describe MessagesController do
     
     context "when create message failed" do
       before do
-        Message.stub(:create!).and_raise(ActiveRecord::ActiveRecordError)
+        message.stub(:save).and_return(false)
       end
       
-      it "returns http 500" do
-        xhr :post, :create, message: params
-        response.code.should eq "500"
+      it "render create_errors.js.erb" do
+        response.should render_template(action: "create_errors.js.erb")
       end
     end
   end
