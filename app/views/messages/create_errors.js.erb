@@ -1,1 +1,3 @@
-$('.alert-error').append('<%= escape_javascript ajax_errors(@message) %>').removeClass('hidden');
+$('.alert-error').html('<%= escape_javascript ajax_errors(@message) %>')
+	.removeClass('hidden').fadeIn('fast');
+$('.alert-error').prepend('<a class="close">×</a>');

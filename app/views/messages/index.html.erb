@@ -5,6 +5,9 @@
 	var message = '<dt>'+data.username+'</dt><dd>'+data.content+'</dd>';
 	$("#chat_room").append(message);
   });
+	$("a.close").live('click', function() {
+	  $(this).parent().addClass('hidden');
+	});
 </script>
 
 <div class="chat_container span4">
@@ -28,6 +31,6 @@
   <%= form_for Message.new, url: room_messages_path(params[:room_id]), html: { class: "well", id: "send" }, remote: true do |f| %>
 		<div class="alert alert-error hidden"></div>
 	  <%= f.text_field :content, placeholder: "Message.." %>
-		<%= f.submit "Send" %>
+		<%= f.submit "Send", class: "span1" %>
 	<% end %>
 </div>
