@@ -1,5 +1,5 @@
 class Message < ActiveRecord::Base
-  self.per_page = 5
+  self.per_page = 10
   
   ROOM_ID = (1..10)
   CHAT_SUBJECTS = ["Chat away!", "Trolling allowed :P", "42?"]
